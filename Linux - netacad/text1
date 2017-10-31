@@ -1,0 +1,286 @@
+1.3.1 Role of the Kernel
+The kernel of the operating system is like an air traffic controller at an 
+airport. The kernel dictates which program gets which pieces of memory, it 
+starts and kills programs, and it handles displaying text on a monitor. When an 
+application needs to write to disk, it must ask the operating system to do it. 
+If two applications ask for the same resource, the kernel decides who gets it, 
+and in some cases, kills off one of the applications in order to save the rest 
+of the system.
+
+The kernel also handles switching of applications. A computer will have a small 
+number of CPUs and a finite amount of memory. The kernel takes care of unloading 
+one task and loading a new task if there are more tasks than CPUs. When the 
+current task has run a sufficient amount of time, the CPU pauses the task so 
+that another may run. This is called pre-emptive multitasking. Multitasking 
+means that the computer is doing several tasks at once, and pre-emptive means 
+that the kernel is deciding when to switch focus between tasks. With the tasks 
+rapidly switching, it appears that the computer is doing many things at once.
+
+Each application may think it has a large block of memory on the system, but it 
+is the kernel that maintains this illusion, remapping smaller blocks of memory, 
+sharing blocks of memory with other applications, or even swapping out blocks 
+that haven’t been touched to disk.
+
+When the computer starts up it loads a small piece of code called a boot loader. 
+The boot loader’s job is to load the kernel and get it started. If you are more 
+familiar with operating systems such as Microsoft Windows or Apple’s OS X, you 
+probably never see the boot loader, but in the UNIX world it’s usually visible 
+so that you can tweak the way your computer boots.
+
+The boot loader loads the Linux kernel, and then transfers control. Linux then 
+continues with running the programs necessary to make the computer useful, such 
+as connecting to the network or starting a web server.
+
+1.3.2 Applications
+Like an air traffic controller, the kernel is not useful without something to control. If the kernel is the tower, the applications are the airplanes. Applications make requests to the kernel and receive resources, such as memory, CPU, and disk, in return. The kernel also abstracts the complicated details away from the application. The application doesn’t know if a block of disk is on a solid-state drive from manufacturer A, a spinning metal hard drive from manufacturer B, or even a network file share. Applications just follow the kernel’s Application Programming Interface (API) and in return don’t have to worry about the implementation details.
+
+When we, as users, think of applications, we tend to think of word processors, web browsers, and email clients. The kernel doesn’t care if it is running something that’s user facing, a network service that talks to a remote computer, or an internal task. So, from this we get an abstraction called a process. A process is just one task that is loaded and tracked by the kernel. An application may even need multiple processes to function, so the kernel takes care of running the processes, starting and stopping them as requested, and handing out system resources.
+
+1.3.4 Linux Distributions
+Take Linux and the GNU tools, add some more user facing applications like an email client, and you have a full Linux system. People started bundling all this software into a distribution almost as soon as Linux became usable. The distribution takes care of setting up the storage, installing the kernel, and installing the rest of the software. The full featured distributions also include tools to manage the system and a package manager to help you add and remove software after the installation is complete.
+
+Like UNIX, there are many different flavors of distributions. These days, there are distributions that focus on running servers, desktops, or even industry specific tools like electronics design or statistical computing. The major players in the market can be traced back to either Red Hat or Debian. The most visible difference is the package manager, though you will find other differences on everything from file locations to political philosophies.
+
+Red Hat started out as a simple distribution that introduced the Red Hat Package Manager (RPM). The developer eventually formed a company around it, which tried to commercialize a Linux desktop for business. Over time, Red Hat started to focus more on the server applications such as web and file serving, and released Red Hat Enterprise Linux, which was a paid service on a long release cycle. The release cycle dictates how often software is upgraded. A business may value stability and want long release cycles, a hobbyist or a startup may want the latest software and opt for a shorter release cycle. To satisfy the latter group, Red Hat sponsors the Fedora Project which makes a personal desktop comprising the latest software, but still built on the same foundations as the enterprise version.
+
+Because everything in Red Hat Enterprise Linux is open source, a project called CentOS came to be, that recompiled all the RHEL packages and gave them away for free. CentOS and others like it (such as Scientific Linux) are largely compatible with RHEL and integrate some newer software, but do not offer the paid support that Red Hat does.
+
+Scientific Linux is an example of a specific use distribution based on Red Hat. The project is a Fermilab sponsored distribution designed to enable scientific computing. Among its many applications, Scientific Linux is used with particle accelerators including the Large Hadron Collider at CERN.
+
+Open SUSE originally derived from Slackware, yet incorporates many aspects of Red Hat. The original company was purchased by Novell in 2003, which was then purchased by the Attachmate Group in 2011. The Attachmate group then merged with Micro Focus International. Through all of the mergers and acquisitions, SUSE has managed to continue and grow. While Open SUSE is desktop based and available to the general public, SUSE Linux Enterprise contains proprietary code and is sold as a server product.
+
+Debian is more of a community effort, and as such, also promotes the use of open source software and adherence to standards. Debian came up with its own package management system based on the .deb file format. While Red Hat leaves non Intel and AMD platform support to derivative projects, Debian supports many of these platforms directly.
+
+Ubuntu is the most popular Debian derived distribution. It is the creation of Canonical, a company that was made to further the growth of Ubuntu and make money by providing support.
+
+Linux Mint was started as a fork of Ubuntu Linux, while still relying upon the Ubuntu repositories. There are various versions, all free of cost, but some include proprietary codecs, which can not be distributed without license restrictions in certain countries. Linux Mint is quickly supplanting Ubuntu as the world's most popular desktop Linux solution.
+
+We have discussed the distributions specifically mentioned in the Linux Essentials objectives. You should be aware that there are hundreds, if not thousands more that are available. It is important to understand that while there are many different distributions of Linux, many of the programs and commands remain the same or are very similar.
+
+1.3.4.1 What is a Command?
+The simplest answer to the question, "What is a command?", is that a command is a software program that when executed on the command line, performs an action on the computer.
+
+When you consider a command using this definition, you are really considering what happens when you execute a command. When you type in a command, a process is run by the operating system that can read input, manipulate data and produce output. From this perspective, a command runs a process on the operating system, which then causes the computer to perform a job.
+
+However, there is another way of looking at what a command is: look at its source. The source is where the command "comes from" and there are several different sources of commands within the shell of your CLI:
+
+Commands built-in to the shell itself: A good example is the cd command as it is part of the bash shell. When a user types the cd command, the bash shell is already executing and knows how to interpret that command, requiring no additional programs to be started.
+Commands that are stored in files that are searched by the shell: If you type a ls command, then the shell searches through the directories that are listed in the PATH variable to try to find a file named ls that it can execute. These commands can also be executed by typing the complete path to the command.
+Aliases: An alias can override a built-in command, function, or a command that is found in a file. Aliases can be useful for creating new commands built from existing functions and commands.
+Functions: Functions can also be built using existing commands to either create new commands, override commands built-in to the shell or commands stored in files. Aliases and functions are normally loaded from the initialization files when the shell first starts, discussed later in this section.
+Consider This
+While aliases will be covered in detail in a later section, this brief example may be helpful in understanding the concept of commands.
+An alias is essentially a nickname for another command or series of commands. For example, the cal 2014 command will display the calendar for the year 2014. Suppose you end up running this command often. Instead of executing the full command each time, you can create an alias called mycal and run the alias, as demonstrated in the following graphic:
+
+Servers usually sit in a rack and share a keyboard and monitor with many other computers, since console access is only used to set up and troubleshoot the server. The server will run in non-graphical mode, which frees up resources for the real purpose of the computer. A desktop will primarily run a GUI.
+
+Next, determine the functions of the machine. Is there specific software it needs to run, or specific functions it needs to do? Do you need to be able to manage hundreds or thousands of these machines at the same time? What is the skill set of the team managing the computer and software?
+
+You must also determine the lifetime and risk tolerance of the server. Operating systems and software upgrades come on a periodic basis, called the release cycle. Software vendors will only support older versions of software for a certain period of time before not offering any updates, which is called the maintenance cycle (or life cycle). For example, major Fedora Linux releases come out approximately every 6 months. Versions are considered End of Life (EOL) after 2 major versions plus one month, so you have between 7 and 13 months after installing Fedora before you need to upgrade. Contrast this with the commercial server variant, Red Hat Enterprise Linux, and you can go up to 13 years before needing to upgrade.
+
+The maintenance and release cycles are important because in an enterprise server environment it is time consuming, and therefore rare, to do a major upgrade on a server. Instead, the server itself is replaced when there are major upgrades or replacements to the application that necessitate an operating system upgrade. Similarly, a slow release cycle is important because applications often target the current version of the operating system and you want to avoid the overhead of upgrading servers and operating systems constantly to keep up. There is a fair amount of work involved in upgrading a server, and the server role often has many customizations made that are difficult to port to a new server. This necessitates much more testing than if only the application were upgraded.
+
+If you are doing software development or traditional desktop work, you often want the latest software. Newer software has improvements in both functionality and appearance, which contributes to more enjoyment from the use of the computer. A desktop often stores its work on a remote server, so the desktop can be wiped clean and the newer operating system put on with little interruption.
+
+Individual software releases can be characterized as beta or stable. One of the great things about being an open source developer is that you can release your new software and quickly get feedback from users. If a software release is in a state that it has many new features that have not been rigorously tested, it is typically referred to as beta. After those features have been tested in the field, the software moves to a stable point. If you need the latest features, then you are looking for a distribution that has a quick release cycle and makes it easy to use beta software. On the server side, you want stable software unless those new features are necessary and you don’t mind running code that has not been thoroughly tested.
+
+Another loosely related concept is backward compatibility. This refers to the ability for a later operating system to be compatible with software made for earlier versions. This is usually a concern if you need to upgrade your operating system, but aren’t in a position to upgrade your application software.
+
+Of course, cost is always a factor. Linux itself might be free, but you may need to pay for support, depending on which options you choose. Microsoft has server license costs and may have additional support costs over the lifetime of the server. Your chosen operating system might only run on a particular selection of hardware, which further affects the cost.
+
+Linux software generally falls into one of three categories:
+
+Server software – software that has no direct interaction with the monitor and keyboard of the machine it runs on. Its purpose is to serve information to other computers, called clients. Sometimes server software may not talk to other computers but will just sit there and "crunch" data.
+Desktop software – a web browser, text editor, music player, or other software that you interact with. In many cases, such as a web browser, the software is talking to a server on the other end and interpreting the data for you. Here, the desktop software is the client.
+Tools – a loose category of software that exists to make it easier to manage your system. You might have a tool that helps you configure your display, or something that provides a Linux shell, or even more sophisticated tools that convert source code to something that the computer can execute.
+
+2.3.1 Server Applications
+Linux excels at running server applications because of its reliability and efficiency. When considering server software, the most important question is “what service am I running?” If you want to serve web pages, you will need web server software, not a mail server!
+
+One of the early uses of Linux was for web servers. A web server hosts content for web pages, which are viewed by a web browser using the Hypertext Transfer Protocol (HTTP) or its encrypted flavor, HTTPS. The web page itself can be static which means that when the web browser requests the page the web server just sends the file as it appears on disk. The server can also serve dynamic content, meaning that the request is sent by the web server to an application, which generates the content. WordPress is one popular example. Users can develop content through their browser in the WordPress application and the software turns it into a fully functional website. Each time you do online shopping, you are looking at a dynamic site.
+
+Apache is the dominant web server in use today. Apache was originally a standalone project but the group has since formed the Apache Software Foundation and maintains over a hundred open source software projects.
+
+Another web server is nginx, which is based out of Russia. It focuses on performance by making use of more modern UNIX kernels and only does a subset of what Apache can do. Over 65% of websites are powered by either nginx or Apache.
+
+Email has always been a popular use for Linux servers. When discussing email servers it is always helpful to look at the 3 different roles required to get email between people:
+
+Mail Transfer Agent (MTA) – figures out which server needs to receive the email and uses the Simple Mail Transfer Protocol (SMTP) to move the email to that server. It is not unusual for an email to take several “hops” to get to its final destination, since an organization might have several MTAs.
+Mail Delivery Agent (MDA, also called the Local Delivery Agent) – takes care of storing the email in the user’s mailbox. Usually invoked from the final MTA in the chain.
+POP/IMAP server – The Post Office Protocol and Internet Message Access Protocol are two communication protocols that let an email client running on your computer talk to a remote server to pick up the email.
+Sometimes a piece of software will implement multiple components. In the closed source world, Microsoft Exchange implements all the components, so there is no option to make individual selections. In the open source world there are many options. Some POP/IMAP servers implement their own mail database format for performance, so will also include the MDA if the custom database is desired. People using standard file formats (such as all the emails in one text file) can choose any MDA.
+
+The most well known MTA is sendmail. Postfix is another popular one and aims to be simpler and more secure than sendmail.
+
+If you’re using standard file formats for storing emails, your MTA can also deliver mail. Alternatively, you can use something like procmail, which lets you define custom filters to process mail and filter it.
+
+Dovecot is a popular POP/IMAP server owing to its ease of use and low maintenance. Cyrus IMAP is another option.
+
+For file sharing, Samba is the clear winner. Samba allows a Linux machine to look like a Windows machine so that it can share files and participate in a Windows domain. Samba implements the server components, such as making files available for sharing and certain Windows server roles, and also the client end so that a Linux machine may consume a Windows file share.
+
+If you have Apple machines on your network, the Netatalk project lets your Linux machine behave as an Apple file server.
+
+The native file sharing protocol for UNIX is called the Network File System (NFS). NFS is usually part of the kernel which means that a remote file system can be mounted just like a regular disk, making file access transparent to other applications.
+
+As your computer network gets larger, you will need to implement some kind of directory. The oldest directory is called the Domain Name System and is used to convert a name like http://www.linux.com to an IP address like 192.168.100.100, which is a unique identifier of that computer on the Internet. DNS also holds such global information like the address of the MTA for a given domain name. An organization may want to run their own DNS server to host their public facing names, and also to serve as an internal directory of services. The Internet Software Consortium Internet Software Consortium maintains the most popular DNS server, simply called bind after the name of the process that runs the service.
+
+The DNS is largely focused on computer names and IP addresses and is not easily searchable. Other directories have sprung up to store other information such as user accounts and security roles. The Lightweight Directory Access Protocol (LDAP) is the most common directory which also powers Microsoft’s Active Directory. In LDAP, an object is stored in a tree, and the position of that object on the tree can be used to derive information about the object in addition to what’s stored with the object itself. For example, a Linux administrator may be stored in a branch of the tree called “IT department”, which is under a branch called “Operations”. Thus one can find all the technical staff by searching under the IT department branch. OpenLDAP is the dominant player here.
+
+One final piece of network infrastructure is called the Dynamic Host Configuration Protocol (DHCP). When a computer boots up, it needs an IP address for the local network so it can be uniquely identified. DHCP’s job is to listen for requests and to assign a free address from the DHCP pool. The Internet Software Consortium also maintains the ISC DHCP server, which is the most common player here.
+
+A database stores information and also allows for easy retrieval and querying. The most popular databases here are MySQL and PostgreSQL. You might enter raw sales figures into the database and then use a language called Structured Query Language (SQL) to aggregate sales by product and date in order to produce a report.
+
+2.3.2 Desktop Applications
+The Linux ecosystem has a wide variety of desktop applications. You can find games, productivity applications, creative tools, and more. This section is a mere survey of what’s out there, focusing on what the LPI deems most important.
+
+Before looking at individual applications, it is helpful to look at the desktop environment. A Linux desktop runs a system called X Window, also known as X11. The Linux X11 server is X.org, which provides a way for software to operate in a graphical mode and accept input from a keyboard and a mouse. Windows and icons are handled by another piece of software called the window manager or desktop environment. A window manager is a simpler version of desktop environment as it only provides the code to draw menus and manage the application windows on the screen. A desktop environment layers in features like login windows, sessions, a file manager, and other utilities. In summary, a text-only Linux workstation becomes a graphical desktop with the addition of X-Windows and either a desktop environment or a window manager.
+
+Window managers include Compiz, FVWM, and Enlightenment, though there are many more. Desktop environments are primarily KDE and GNOME, both of which have their own window managers. Both KDE and GNOME are mature projects with an incredible amount of utilities built against them, and the choice is often a matter of personal preference.
+
+The basic productivity applications, such as a word processor, spreadsheet, and presentation package are very important. Collectively they’re known as an office suite, largely due to Microsoft Office who is the dominant player in the market.
+
+OpenOffice (sometimes called OpenOffice.org) and LibreOffice offer a full office suite, including a drawing tool that strives for compatibility with Microsoft Office both in terms of features and file formats. These two projects are also a great example of how politics influence open source.
+
+In 1999 Sun Microsystems acquired a relatively obscure German company that was making an office suite for Linux called StarOffice. Soon after that, Sun rebranded it as OpenOffice and released it under an open source license. To further complicate things, StarOffice remained a proprietary product that drew from OpenOffice. In 2010 Sun was acquired by Oracle, who later turned the project over to the Apache Foundation.
+
+Oracle has had a poor history of supporting open source projects that it acquires, so shortly after the acquisition by Oracle the project was forked to become LibreOffice. At that point there became two groups of people developing the same piece of software. Most of the momentum went to the LibreOffice project which is why it is included by default in many Linux distributions.
+
+For browsing the web, the two main contenders are Firefox and Google Chrome. Both are open source web browsers that are fast, feature rich, and have excellent support for web developers. These two packages are a good example of how diversity is good for open source – improvements to one spur the other team to try and best the other. As a result, the Internet has two excellent browsers that push the limits of what can be done on the web and work across a variety of platforms.
+
+The Mozilla project has also come out with Thunderbird, a full featured desktop email client. Thunderbird connects to a POP or IMAP server, displays email locally, and sends email through an external SMTP server.
+
+Other notable email clients are Evolution and KMail which are the GNOME and KDE project’s email clients. Standardization through POP and IMAP and local email formats means that it’s easy to switch between email clients without losing data. Web based email is also another option.
+
+For the creative types, there is Blender, GIMP, and Audacity which handle 3D movie creation, 2D image manipulation, and audio editing respectively. They have had various degrees of success in professional markets. Blender is used for everything from independent films to Hollywood movies, for example.
+
+ The history of the development of UNIX shows considerable overlap between the skills of software development and systems administration. The tools that let you manage the system have features of computer languages such as loops, and some computer languages are used extensively in automating systems administration tasks. Thus, one should consider these skills complementary.
+
+At the basic level, you interact with a Linux system through a shell no matter if you are connecting to the system remotely or from an attached keyboard. The shell’s job is to accept commands, such as file manipulations and starting applications, and to pass those to the Linux kernel for execution. Here, we show a typical interaction with the Linux shell:
+
+sysadmin@localhost:~ $ ls -l /tmp/*.gz
+-rw-r--r-- 1 sean root 246841 Mar  5  2013 /tmp/fdboot.img.gz
+sysadmin@localhost:~ $ rm /tmp/fdboot.img.gz
+The user is given a prompt, which typically ends in a dollar sign ($) to indicate an unprivileged account. Anything before the prompt, in this case sysadmin@localhost:~, is a configurable prompt that provides extra information to the user. In the figure above, sysadmin is the name of the current user, localhost is the name of the server, and ~ is the current directory (in UNIX, the tilde symbol is a short form for the user’s home directory). We will look at Linux commands in more detail in further chapters, but to finish the explanation, the first command lists files with the ls command, receives some information about the file, and then removes that file with the rm command.
+
+The Linux shell provides a rich language for iterating over files and customizing the environment, all without leaving the shell. For example, it is possible to write a single command line that finds files with contents matching a certain pattern, extracts useful information from the file, then copies the new information to a new file.
+
+Linux offers a variety of shells to choose from, mostly differing in how and what can be customized, and the syntax of the built-in scripting language. The two main families are the Bourne shell and the C shell. The Bourne shell was named after the creator and the C shell was named because the syntax borrows heavily from the C language. As both these shells were invented in the 1970’s there are more modern versions, the Bourne Again Shell (Bash) and the tcsh (tee-cee-shell). Bash is the default shell on most systems, though you can almost be certain that tcsh is available if that is your preference.
+
+Other people took their favorite features from Bash and tcsh and have made other shells, such as the Korn shell (ksh) and zsh. The choice of shells is mostly a personal one. If you can become comfortable with Bash then you can operate effectively on most Linux systems. After that you can branch out and try new shells to see if they help your productivity.
+
+Even more dividing than the selection of shells is the choice of text editors. A text editor is used at the console to edit configuration files. The two main camps are vi (or the more modern vim) and emacs. Both are remarkably powerful tools to edit text files, they differ in the format of the commands and how you write plugins for them. Plugins could be anything from syntax highlighting of software projects to integrated calendars.
+
+Both vim and emacs are complex and have a steep learning curve. This is not helpful if all you need is simple editing of a small text file. Therefore pico and nano are available on most systems (the latter being a derivative of the former) and provide very basic text editing.
+
+Even if you choose not to use vi you should strive to gain some basic familiarity because the basic vi is on every Linux system. If you are restoring a broken Linux system by running in the distribution’s recovery mode you are certain to have vi available.
+
+If you have a Linux system you will need to add, remove, and update software. At one point this meant downloading the source code, setting it up, building it, and copying files on each system. Thankfully, distributions created packages which are compressed copies of the application. A package manager takes care of keeping track of which files belong to which package and even downloading updates from a remote server called a repository. On Debian systems the tools include dpkg, apt-get, and apt-cache. On Red Hat derived systems, you use rpm and yum. We will look more at packages later.
+
+2.3.4 Development Tools
+It should come as no surprise that as software built on contributions from programmers, Linux has excellent support for software development. The shells are built to be programmable and there are powerful editors included on every system. There are also many development tools available, and many modern languages treat Linux as a first class citizen.
+
+Computer languages provide a way for a programmer to enter instructions in a more human readable format, and for those instructions to eventually become translated into something the computer understands. Languages fall into one of two camps: interpreted or compiled. An interpreted language translates the written code into computer code as the program runs, and a compiled language is translated all at once.
+
+Linux itself was written in a compiled language called C. C’s main benefit is that the language itself maps closely to the generated machine code so that a skilled programmer can write code that is small and efficient. When computer memory was measured in the Kilobytes, this was very important. Even with large memory sizes today, C is still helpful for writing code that must run fast, such as an operating system.
+
+C has been extended over the years. There is C++, which adds object support to C (a different style of programming), and Objective C that took another direction and is in heavy use in Apple products.
+
+The Java language takes a different spin on the compiled approach. Instead of compiling to machine code, Java first imagines a hypothetical CPU called the Java Virtual Machine (JVM) and compiles all the code to that. Each host computer then runs JVM software to translate the JVM instructions (called bytecode) into native instructions.
+
+The extra translation with Java might make you think it would be slow. However, the JVM is fairly simple so it can be implemented quickly and reliably on anything from a powerful computer to a low power device that connects to a television. A compiled Java file can also be run on any computer implementing the JVM!
+
+Another benefit of compiling to an intermediate target is that the JVM can provide services to the application that normally wouldn’t be available on a CPU. Allocating memory to a program is a complex problem, but that’s built into the JVM. This also means that JVM makers can focus their improvements on the JVM as a whole, so any progress they make is instantly available to applications.
+
+Interpreted languages, on the other hand, are translated to machine code as they execute. The extra computer power spent doing this can often be recouped by the increased productivity the programmer gains by not having to stop working to compile. Interpreted languages also tend to offer more features than compiled languages, meaning that often less code is needed. The language interpreter itself is usually written in another language such as C, and sometimes even Java! This means that an interpreted language is being run on the JVM, which is translated at runtime into actual machine code.
+
+Perl is an interpreted language. Perl was originally developed to perform text manipulation. Over the years, it gained favor with systems administrators and still continues to be improved and used in everything from automation to building web applications.
+
+PHP is a language that was originally built to create dynamic web pages. A PHP file is read by a web server such as Apache. Special tags in the file indicate that parts of the code should be interpreted as instructions. The web server pulls all the different parts of the file together and sends it to the web browser. PHP’s main advantages are that it is easy to learn and available on almost any system. Because of this, many popular projects are built on PHP. Notable examples include WordPress (blogging), cacti (for monitoring), and even parts of Facebook.
+
+Ruby is another language that was influenced by Perl and Shell, along with many other languages. It makes complex programming tasks relatively easy, and with the inclusion of the Ruby on Rails framework, is a popular choice for building complex web applications. Ruby is also the language that powers many of the leading automation tools like Chef and Puppet, which make managing a large number of Linux systems much easier.
+
+Python is another scripting language that is in common use. Much like Ruby it makes complex tasks easier and has a framework called Django that makes building web applications very easy. Python has excellent statistical processing abilities and is a favorite in academia.
+
+A language is just a tool that makes it easier to tell the computer what you want it to do. A library bundles common tasks into a distinct package that can be used by the developer. ImageMagick is one such library that lets programmers manipulate images in code. ImageMagick also ships with some command line tools that enable you to process images from a shell and take advantage of the scripting capabilities there.
+
+OpenSSL is a cryptographic library that is used in everything from web servers to the command line. It provides a standard interface so that you can add cryptography into your Perl script, for example.
+
+At a much lower level is the C library. This provides a basic set of functions for reading and writing to files and displays, which is used by applications and other languages alike.
+
+
+
+
+
+
+A terminal window displays a prompt; the prompt appears when no commands are being run and when all command output has been printed to the screen. The prompt is designed to tell the user to enter a command.
+
+The structure of the prompt may vary between distributions, but will typically contain information about the user and the system. Below is a common prompt structure:
+
+sysadmin@localhost:~$
+The previous prompt provides the name of the user that is logged in (sysadmin), the name of the system (localhost) and the current directory (~). The ~ symbol is used as shorthand for the user's home directory (typically the home directory for the user is under the /home directory and named after the user account name, for example: /home/sysadmin).
+
+A shell is the interpreter that translates commands entered by a user into actions to be performed by the operating system. The Linux environment provides many different types of shells, some of which have been around for many years.
+
+The most commonly used shell for Linux distributions is called the BASH shell. It is a shell that provides many advanced features, such as command history, which allows you to easily re-execute previously executed commands.
+
+The BASH shell also has other popular features:
+
+- Scripting: The ability to place commands in a file and execute the file, resulting in all of the commands being executed. This feature also has some programming features, such as conditional statements and the ability to create functions (AKA, subroutines).
+- Aliases: The ability to create short "nicknames" for longer commands.
+- Variables: Variables are used to store information for the BASH shell. These variables can be used to modify how commands and features work as well as provide vital system information.
+The previous list is just a short summary of some of the many features provided by the BASH shell.
+
+4.4.4 Working with Options
+Options can be used with commands to expand or modify the way a command behaves. Options are often single letters; however, they sometimes will be "words" as well. Typically, older commands use single letters while newer commands use complete words for options. Single-letter options are preceded by a single dash (-). Full-word options are preceded by two dashes (--).
+
+For example, you can use the -l option with the ls command to display more information about the files that are listed. The ls -l command will list the files contained within the current directory and provide additional information, such as the permissions, the size of the file and other information:
+
+
+In most cases, options can be used in conjunction with other options. For example, the ls -l -h or ls -lh command will list files with details, but will display the file sizes in human readable format instead of the default value (bytes):
+
+
+Note that the previous example also demonstrated how you can combine single letter options: -lh. The order of the combined options isn't important.
+
+The -h option also has a full-word form: --human-readable.
+
+Options can often be used with an argument. In fact, some options require their own arguments. You can use options and arguments with the ls command to list the contents of another directory by executing the ls -l /etc/ppp command:
+
+
+ 4.5 Command history
+When you execute a command in a terminal, the command is stored in a "history list". This is designed to make it easy for you to execute the same command later since you won't need to retype the entire command.
+
+To view the history list of a terminal, use the history command:
+
+
+Pressing the Up Arrow key will display the previous command on your prompt line. You can press up repeatedly to move back through the history of commands you have run. Pressing the Enter key will run the displayed command again.
+
+When you find the command that you want to execute, you can use the Left arrow keys and Right arrow keys to position the cursor for editing. Other useful keys for editing include the Home, End, Backspace and Delete keys.
+
+If you see a command you wish to run in the list that the history command generates, you can execute this command by typing an exclamation point and then the number next to the command, for example:
+
+!3
+
+Some additional history examples:
+
+Example	Meaning
+history 5	Show the last five commands from the history list
+!!	Execute the last command again
+!-5	Execute the fifth command from the bottom of the history list
+!ls	Execute the most recent ls command
+
+4.7 PATH variable
+One of the most important BASH shell variables to understand is the PATH variable.
+
+The term path refers to a list that defines which directories the shell will look in for commands. If you type in a command and receive a “command not found” error, it is because the BASH shell was unable to locate a command by that name in any of the directories included in the path. The following command displays the path of the current shell:
+
+Based on the proceeding output, when you attempt to execute a command, the shell will first look for the command in the /usr/lib/qt-3.3/bin directory. If the command is found in that directory, then it is executed. If it isn't found, then the shell will look in the /usr/local/bin directory.
+
+If the command is not found in any directory listed in the PATH variable, then you will receive a "command not found" error:
+
+
+If custom software is installed on your system, you may need to modify the PATH to make it easier to execute these commands. For example, the following will add the /usr/bin/custom directory to the PATH variable: PATH=/usr/bin/custom:$PATH
+
+4.14.1 Semicolon
+The semicolon can be used to run multiple commands, one after the other. Each command runs independently and consecutively; no matter the result of the first command, the second will run once the first has completed, then the third and so on.
+
+For example, if you want to print the months of January, February and March of 2014, you can execute cal 1 2014; cal 2 2014; cal 3 2014 on the command line:

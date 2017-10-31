@@ -1,0 +1,366 @@
+/***********
+GENERAL
+***********/
+
+/*Get rid of the default browser padding and margin*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none /*clears the bullets in the lists*/
+}
+/*makes the css elements as blocks -> easier to style/arrange*/
+header, nav, article, section, aside, footer, div {
+    display: block;
+}
+/*centering the website*/
+.container {
+    width: 1000px;
+    margin: 0 auto; /*leaves a margin of 0 px at the top and at the bottom, while the left and right is auto*/
+    position: relative; /*make position non-static*/
+    min-height: 99%;
+}
+/*removes the underline in links*/
+a {
+    text-decoration: none;
+    color: deepskyblue;
+}
+/*removes floating elements that might interfere with the header or footer*/
+.clear {
+    clear: both;
+}
+.selected {
+    color: grey;
+}
+
+
+/**********
+HEADER
+**********/
+
+header {
+    padding-top: 20px ;
+}
+/*style for the header_logo*/
+.header_logo {
+    height: 80px;
+    width: 100px;
+    float: left;
+}
+/*style for the header menu*/
+.header_list {
+    float: right;
+}
+.header_inline-list li {
+    display: inline-block;
+    padding-left: 5px;
+}
+
+/**********
+FOOTER
+**********/
+/*nu stiu cum sa pastrez footer in partea de jos a paginii Home (index), fara sa fie spatiul gol sub footer*/
+
+/*style for the footer menu*/
+
+.footer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.footer_list {
+    float: right;
+    display: block;
+}
+.footer_inline-list li {
+    display: inline-block;
+    padding-left: 5px;
+}
+.copyright {
+    float: left;
+}
+
+/***********
+HOMEPAGE
+***********/
+
+/*style for the left side menu*/
+.left_side {
+    float: left;
+    width: 100px;
+    padding: 10px 10px 10px 0;
+}
+.left_side li {
+    padding: 5px;
+}
+/*style for the left ad*/
+.ad1 {
+    height: 200px;
+    width: 100px;
+    padding-top: 45px;
+}
+
+
+/*style for the content part of the page*/
+.content {
+    float: left;
+    width: 850px;
+    padding-left: 20px;
+    height: 550px;
+}
+.page_title {
+    color: darkslategrey;
+    float: left;
+    display: inline-block;
+}
+/*nu stiu sa fac fontul pentru subtitlu mai mic, dar sa ramana aliniat la titlu*/
+.page_subtitle {
+    color: darkgray;
+    float: left;
+    display: inline-block;
+    padding: 0 0 0 10px;
+}
+
+
+/************
+SECTION 1 PAGE
+************/
+
+/*The image container style*/
+
+img {
+    max-width: 100%; /*makes the images occupy all the browser-s window, regrdaless  of being minimazed or not*/
+}
+
+.gallery {
+    margin: 0;
+    padding: 0;
+    width: 1000px;
+}
+
+#slide_image {
+    clear:both;
+    padding-top: 25px;
+}
+
+.gallery li {
+    float: left;
+    text-align: center;
+}
+
+.gallery p {
+    font-size: 0.75em;
+    background-color: lightgray;
+    margin-bottom: 5px;
+    width: 230px;
+    padding: 5px;
+}
+
+.gthumb {
+    width: 250px;
+}
+
+/*The style for the left-side bottom article*/
+.left_bottom_article {
+    clear: left;
+    float: left;
+    background-color: lightgray;
+    font-size: 0.75em;
+    width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/*The style for the left side of the bottom article*/
+#left_col {
+    float:left;
+    width:290px;
+    padding-right:10px;
+}
+
+/*The style for the right side of the bottom article*/
+#right_col {
+    float:right;
+    width:290px;
+    padding-left:10px;
+}
+
+/*The style for the right-side bottom article*/
+.right_bottom_article {
+    float: right;
+    font-size: 0.75em;
+    width: 300px;
+    margin: 0 auto;
+}
+/*the buttons style*/
+#button_list li {
+    padding: 0 0 10px 0;
+}
+button {
+    background: lightskyblue;
+    width: 300px;
+    height: 40px;
+    color: royalblue;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+/************
+SECTION 2 PAGE
+************/
+/*The left side style*/
+.left_aside {
+    float: left;
+    width: 300px;
+    padding: 10px 10px 10px 0;
+}
+
+.logo2_whole {
+    background: lightgray;
+}
+
+.aside_header,.aside_bottom p  {
+    padding: 10px;
+}
+.aside_bottom {
+    background: lightgreen;
+}
+
+/*The center thumb style*/
+
+.thumb_container {
+    padding-top: 10px;
+    float: left;
+}
+
+.thumb {
+    width:180px;
+}
+.gallery_thumb {
+    margin: 0;
+    padding: 0;
+    width: 600px;
+}
+
+.gallery_thumb li{
+    float: left;
+    text-align: center;
+
+}
+
+.gallery_thumb p {
+    /*padding: 5px 5px 5px 10px ;*/
+    background-color: lightgray;
+    text-align: justify;
+    margin-right: 5px;
+}
+
+/*The bottom article style*/
+.bottom_article {
+    clear: both;
+    width: 640px;
+    height: 100px;
+    float: right;
+    background: lightgray;
+    padding: 25px;
+}
+.left_img {
+    width: 100px;
+    height: 110px;
+    float: left;
+    padding-right: 20px;
+}
+
+.right.col {
+    float: right;
+}
+
+/************
+SECTION 3 PAGE
+************/
+
+/*the style for the left side article and form */
+.get_in_touch {
+    padding-top: 25px;
+    width: 600px;
+    float: left;
+    padding-right: 25px;
+}
+
+.contact_form {
+    padding-top: 25px;
+}
+
+.form_title {
+    color: royalblue;
+}
+/*Align the cells from the contact form*/
+form  {
+    display: table;
+}
+form > p    {
+    display: table-row;
+}
+label {
+    display: table-cell;
+    width: 150px;
+}
+input {
+    display: table-cell;
+    width: 450px;
+}
+ textarea {
+     width: 450px;
+ }
+
+/*the style for the submit button side map */
+.submit_button {
+    background: darkblue;
+    width: 150px;
+    height: 50px;
+    color: whitesmoke;
+}
+.submit {
+    padding-top: 10px;
+}
+/*the style for the right side map */
+
+.right_side {
+    float: right;
+    padding-top: 25px;
+    width: 375px;
+}
+
+.right_side {
+    padding-bottom: 10px;
+    font-size: 0.75em;
+}
+
+.map_link {
+    font-size: 0.75em;
+}
+
+.street {
+    padding-top: 25px;
+}
+
+/*the style for the bottom person gallery */
+.persons_gallery {
+    padding-top: 25px;
+    width: 600px;
+}
+
+.persons_gallery p{
+    color: lightseagreen;
+}
+.member_gallery {
+    padding-top: 25px;
+
+}
+
+.member_gallery li {
+    float: left;
+    display: block;
+    padding-right: 20px;
+}
+

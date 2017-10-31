@@ -1,0 +1,92 @@
+
+/**************
+MEDIA QUERIES
+**************/
+/******
+Index Page
+******/
+@media screen and (max-width: 999px) {/*999, minus 1 of the width set for the browser page :)- for tablets*/
+    .header {
+        width: 100%;
+    }
+    .footer {
+        width: 100%;
+    }
+
+    .container {
+        width:100%;
+    }
+  /******
+  Index Page
+  ******/
+
+    .left_side {
+        width: 30%;
+    }
+    .content {
+        width: 70%;
+    }
+
+    /******
+    Section 1 - nu stiu sa fac responsiveness pentru galeria de imagini
+    ******/
+    img{
+        width: 100%;
+        height: auto;
+    }
+
+    .left_bottom_article, .right_bottom_article {
+        width: 100%;
+    }
+
+    /******
+    Section 2 - nu stiu sa fac responsiveness pentru galeria de imagini
+    ******/
+    .bottom_article, .right_col  {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 640px) { /*for phones*/
+    /******
+     Index Page
+    ******/
+    .left_side {
+        width: 100%;
+    }
+    .content {
+        width: 100%;
+    }
+
+    /******
+  Section 1 - nu stiu sa fac responsiveness pentru galeria de imagini
+  ******/
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .left_bottom_article, .right_bottom_article {
+        width: 100%;
+    }
+
+    /******
+    Section 2 - nu stiu sa fac responsiveness pentru galeria de imagini
+    ******/
+
+    .bottom_article, .right_col {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    /******
+    Index Page
+    ******/
+    .container {
+        width: 320px;
+    }
+}
+
+

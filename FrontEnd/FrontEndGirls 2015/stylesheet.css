@@ -1,0 +1,81 @@
+/*Get rid of the default browser padding and margin*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none /*clears the bullets in the lists*/
+}
+
+
+header, nav, article, section, aside, footer, div {
+    display: block;
+}
+/*centering the website*/
+.container {
+    width: 1000px;
+    margin: 0 auto; /*leaves a margin of 0 px at the top and at the bottom, while the left and right is auto*/
+}
+
+.header_logo {
+    height: 10%;
+    width: 10%;
+    float: left;
+}
+
+.header_list {
+    float: left;
+}
+
+.ad1 {
+    height: 200px;
+    width: 100px;
+}
+/*inline-block -> displays the list items inline, instead of one on top of the other*/
+.header_inline-list li {
+    display: inline-block;
+    padding: 15px 20px;
+}
+
+.footer_inline-list li {
+    display: inline-block;
+    padding-left: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+/*removes floating elements that might interfere with the header or footer*/
+.clear {
+    clear: both;
+}
+
+.left_side {
+    float: left;
+    width: 100px;
+    padding: 10px;
+}
+
+.content {
+    float: left;
+    width: 850px;
+}
+
+.copyright {
+    float: left;
+}
+
+.footer_menu {
+    float: left;
+}
+
+.page_title {
+    color: darkslategrey;
+    float: left;
+}
+
+.page_subtitle {
+    color: darkgray;
+    padding-left: 20px;
+    padding-top: 3px;
+    float: left;
+}
+

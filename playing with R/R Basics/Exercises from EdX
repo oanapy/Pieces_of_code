@@ -1,0 +1,36 @@
+Exercises in R:
+- install.packages("rafalib")
+- install.packages("downloader")
+- library(rafalib)
+- library(downloader)
+- download the .csv file from the GitHub 
+- dat <- read.csv("femaleMiceWeights.csv")
+- install.packages("devtools")
+- library(devtools)
+- str(dat)
+'data.frame':   24 obs. of  2 variables:
+ $ Diet      : Factor w/ 2 levels "chow","hf": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Bodyweight: num  21.5 28.1 24 23.4 23.7 ...
+ - row12 <- dat$Bodyweight[12] # shows the data on the 12th row of the column Bodyweight
+ - weight_col <- c(dat$Bodyweight) # saves the column Bodyweight as a vector
+- weight_col[11] # corresponds to the 11th measurement
+[1] 26.91
+- table(dat$Diet) # how many times each value actually occurs in the data
+- which(dat$Diet == "hf") # what rows contain the specific value "hf"
+ [1] 13 14 15 16 17 18 19 20 21 22 23 24
+ - mn <- mean(dat$Bodyweight[13:24]) # computes the mean of the bodyweight of those mice fed with high fat (hf)
+ - set.seed(1); sample(c(13:24), 1) # set.seed(1) is to ensure that the random chosen is constant
+[1] 16
+- library(dplyr) 
+- chow <- filter(dat, Diet=="chow") #keep only the ones with chow diet
+- head(chow)
+- chowVals <- select(chow,Bodyweight) # we can select only the column with the values
+- head(chowVals)
+########dplyr - A nice feature of the dplyr package is that you can perform consecutive tasks by using what is called a “pipe”. In dplyr we use %>% to denote a pipe. This symbol tells the program to first do one thing and then do something else to the result of the first. Hence, we can perform several data manipulations in one line.
+- ex: chowVals <- filter(dat, Diet=="chow") %>% select(Bodyweight)
+
+#######For pedagogical reasons, we will often want the final result to be a simple numeric vector. To obtain such a vector with dplyr, we can apply the unlist function which turns lists, such as data.frames, into numeric vectors:
+- ex: chowVals <- filter(dat, Diet=="chow") %>% select(Bodyweight) %>% unlist
+###### To do this in R without dplyr the code is the following: 
+- chowVals <- dat[ dat$Diet=="chow", colnames(dat)=="Bodyweight"]
+ 
